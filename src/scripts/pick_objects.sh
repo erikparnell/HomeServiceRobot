@@ -4,7 +4,7 @@ xterm -e " source /home/workspace/catkin_ws/devel/setup.bash; roslaunch turtlebo
 
 sleep 10
 
-xterm -e " source /home/workspace/catkin_ws/devel/setup.bash; roslaunch turtlebot_gazebo amcl_demo.launch " &
+xterm -e " source /home/workspace/catkin_ws/devel/setup.bash; roslaunch turtlebot_gazebo amcl_demo.launch map_file:=/home/workspace/catkin_ws/src/map/map.yaml " &
 
 sleep 10
 
