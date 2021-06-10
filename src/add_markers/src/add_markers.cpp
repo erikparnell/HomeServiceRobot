@@ -122,16 +122,21 @@ int main( int argc, char** argv )
 //goal detection and marker movement code
 
 //callback function that kicks off when sub1 gets message from /move_base/result topic
-void marker_mover(msg){
+void marker_mover(const std_msgs::String::ConstPtr& msg){
+    ROS_INFO("--MOVE RESULT STATUS--");
+    ROS_INFO("status: %d", msg.status.status);
     if(msg.status.status == 3){
         if(msg.status.id.id == "/simple_navigation_goals-1" + anything){ //id 1 = arrived at first goal
-            marker.action = visualization_msgs::Marker::DELETE; //robot "picks up" marker upon arriving at first goal
+            ros::Duration(5).sleep() // 5 seconds simulating "pick up"
+            ROS_INFO("Picking up object");
+            marker.color.a = 0.0; //robot "picks up" marker, actually just setting alpha to 0 to make it disappear
         }
         else if(status.id.id == "/simple_navigation_goals-2" + anything){ //id 2 = arrived at return goal
             ros::Duration(5).sleep() // 5 seconds simulating "drop off"
-            marker.action = visualization_msgs::Marker::ADD; //robot finishes "drop off" marker upon arriving at return goal
-            marker.pose.position.x = -0.25; //return goal positions
+            ROS_INFO("Dropping off object");
+            marker.pose.position.x = -0.25; //second/return goal positions
             marker.pose.position.y = -0.25;
+            marker.color.a = 1.0; //robot finishes "drop off" marker upon arriving at return goal
         }
     }
 }
