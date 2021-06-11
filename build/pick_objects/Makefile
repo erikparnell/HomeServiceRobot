@@ -79,6 +79,17 @@ rebuild_cache/fast: rebuild_cache
 
 .PHONY : rebuild_cache/fast
 
+# Special rule for the target test
+test:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
+	/usr/bin/ctest --force-new-ctest-process $(ARGS)
+.PHONY : test
+
+# Special rule for the target test
+test/fast: test
+
+.PHONY : test/fast
+
 # Special rule for the target install/local
 install/local: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
@@ -122,17 +133,6 @@ edit_cache/fast: edit_cache
 
 .PHONY : edit_cache/fast
 
-# Special rule for the target test
-test:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
-	/usr/bin/ctest --force-new-ctest-process $(ARGS)
-.PHONY : test
-
-# Special rule for the target test
-test/fast: test
-
-.PHONY : test/fast
-
 # The main all target
 all: cmake_check_build_system
 	cd /home/workspace/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/workspace/catkin_ws/build/CMakeFiles /home/workspace/catkin_ws/build/pick_objects/CMakeFiles/progress.marks
@@ -166,81 +166,6 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-pick_objects/CMakeFiles/pick_objects.dir/rule:
-	cd /home/workspace/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 pick_objects/CMakeFiles/pick_objects.dir/rule
-.PHONY : pick_objects/CMakeFiles/pick_objects.dir/rule
-
-# Convenience name for target.
-pick_objects: pick_objects/CMakeFiles/pick_objects.dir/rule
-
-.PHONY : pick_objects
-
-# fast build rule for target.
-pick_objects/fast:
-	cd /home/workspace/catkin_ws/build && $(MAKE) -f pick_objects/CMakeFiles/pick_objects.dir/build.make pick_objects/CMakeFiles/pick_objects.dir/build
-.PHONY : pick_objects/fast
-
-# Convenience name for target.
-pick_objects/CMakeFiles/actionlib_msgs_generate_messages_py.dir/rule:
-	cd /home/workspace/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 pick_objects/CMakeFiles/actionlib_msgs_generate_messages_py.dir/rule
-.PHONY : pick_objects/CMakeFiles/actionlib_msgs_generate_messages_py.dir/rule
-
-# Convenience name for target.
-actionlib_msgs_generate_messages_py: pick_objects/CMakeFiles/actionlib_msgs_generate_messages_py.dir/rule
-
-.PHONY : actionlib_msgs_generate_messages_py
-
-# fast build rule for target.
-actionlib_msgs_generate_messages_py/fast:
-	cd /home/workspace/catkin_ws/build && $(MAKE) -f pick_objects/CMakeFiles/actionlib_msgs_generate_messages_py.dir/build.make pick_objects/CMakeFiles/actionlib_msgs_generate_messages_py.dir/build
-.PHONY : actionlib_msgs_generate_messages_py/fast
-
-# Convenience name for target.
-pick_objects/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/workspace/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 pick_objects/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/rule
-.PHONY : pick_objects/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/rule
-
-# Convenience name for target.
-actionlib_msgs_generate_messages_nodejs: pick_objects/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/rule
-
-.PHONY : actionlib_msgs_generate_messages_nodejs
-
-# fast build rule for target.
-actionlib_msgs_generate_messages_nodejs/fast:
-	cd /home/workspace/catkin_ws/build && $(MAKE) -f pick_objects/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/build.make pick_objects/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/build
-.PHONY : actionlib_msgs_generate_messages_nodejs/fast
-
-# Convenience name for target.
-pick_objects/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/rule:
-	cd /home/workspace/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 pick_objects/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/rule
-.PHONY : pick_objects/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/rule
-
-# Convenience name for target.
-actionlib_msgs_generate_messages_eus: pick_objects/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/rule
-
-.PHONY : actionlib_msgs_generate_messages_eus
-
-# fast build rule for target.
-actionlib_msgs_generate_messages_eus/fast:
-	cd /home/workspace/catkin_ws/build && $(MAKE) -f pick_objects/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/build.make pick_objects/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/build
-.PHONY : actionlib_msgs_generate_messages_eus/fast
-
-# Convenience name for target.
-pick_objects/CMakeFiles/move_base_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/workspace/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 pick_objects/CMakeFiles/move_base_msgs_generate_messages_nodejs.dir/rule
-.PHONY : pick_objects/CMakeFiles/move_base_msgs_generate_messages_nodejs.dir/rule
-
-# Convenience name for target.
-move_base_msgs_generate_messages_nodejs: pick_objects/CMakeFiles/move_base_msgs_generate_messages_nodejs.dir/rule
-
-.PHONY : move_base_msgs_generate_messages_nodejs
-
-# fast build rule for target.
-move_base_msgs_generate_messages_nodejs/fast:
-	cd /home/workspace/catkin_ws/build && $(MAKE) -f pick_objects/CMakeFiles/move_base_msgs_generate_messages_nodejs.dir/build.make pick_objects/CMakeFiles/move_base_msgs_generate_messages_nodejs.dir/build
-.PHONY : move_base_msgs_generate_messages_nodejs/fast
-
-# Convenience name for target.
 pick_objects/CMakeFiles/actionlib_generate_messages_py.dir/rule:
 	cd /home/workspace/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 pick_objects/CMakeFiles/actionlib_generate_messages_py.dir/rule
 .PHONY : pick_objects/CMakeFiles/actionlib_generate_messages_py.dir/rule
@@ -254,126 +179,6 @@ actionlib_generate_messages_py: pick_objects/CMakeFiles/actionlib_generate_messa
 actionlib_generate_messages_py/fast:
 	cd /home/workspace/catkin_ws/build && $(MAKE) -f pick_objects/CMakeFiles/actionlib_generate_messages_py.dir/build.make pick_objects/CMakeFiles/actionlib_generate_messages_py.dir/build
 .PHONY : actionlib_generate_messages_py/fast
-
-# Convenience name for target.
-pick_objects/CMakeFiles/actionlib_generate_messages_cpp.dir/rule:
-	cd /home/workspace/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 pick_objects/CMakeFiles/actionlib_generate_messages_cpp.dir/rule
-.PHONY : pick_objects/CMakeFiles/actionlib_generate_messages_cpp.dir/rule
-
-# Convenience name for target.
-actionlib_generate_messages_cpp: pick_objects/CMakeFiles/actionlib_generate_messages_cpp.dir/rule
-
-.PHONY : actionlib_generate_messages_cpp
-
-# fast build rule for target.
-actionlib_generate_messages_cpp/fast:
-	cd /home/workspace/catkin_ws/build && $(MAKE) -f pick_objects/CMakeFiles/actionlib_generate_messages_cpp.dir/build.make pick_objects/CMakeFiles/actionlib_generate_messages_cpp.dir/build
-.PHONY : actionlib_generate_messages_cpp/fast
-
-# Convenience name for target.
-pick_objects/CMakeFiles/move_base_msgs_generate_messages_cpp.dir/rule:
-	cd /home/workspace/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 pick_objects/CMakeFiles/move_base_msgs_generate_messages_cpp.dir/rule
-.PHONY : pick_objects/CMakeFiles/move_base_msgs_generate_messages_cpp.dir/rule
-
-# Convenience name for target.
-move_base_msgs_generate_messages_cpp: pick_objects/CMakeFiles/move_base_msgs_generate_messages_cpp.dir/rule
-
-.PHONY : move_base_msgs_generate_messages_cpp
-
-# fast build rule for target.
-move_base_msgs_generate_messages_cpp/fast:
-	cd /home/workspace/catkin_ws/build && $(MAKE) -f pick_objects/CMakeFiles/move_base_msgs_generate_messages_cpp.dir/build.make pick_objects/CMakeFiles/move_base_msgs_generate_messages_cpp.dir/build
-.PHONY : move_base_msgs_generate_messages_cpp/fast
-
-# Convenience name for target.
-pick_objects/CMakeFiles/move_base_msgs_generate_messages_eus.dir/rule:
-	cd /home/workspace/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 pick_objects/CMakeFiles/move_base_msgs_generate_messages_eus.dir/rule
-.PHONY : pick_objects/CMakeFiles/move_base_msgs_generate_messages_eus.dir/rule
-
-# Convenience name for target.
-move_base_msgs_generate_messages_eus: pick_objects/CMakeFiles/move_base_msgs_generate_messages_eus.dir/rule
-
-.PHONY : move_base_msgs_generate_messages_eus
-
-# fast build rule for target.
-move_base_msgs_generate_messages_eus/fast:
-	cd /home/workspace/catkin_ws/build && $(MAKE) -f pick_objects/CMakeFiles/move_base_msgs_generate_messages_eus.dir/build.make pick_objects/CMakeFiles/move_base_msgs_generate_messages_eus.dir/build
-.PHONY : move_base_msgs_generate_messages_eus/fast
-
-# Convenience name for target.
-pick_objects/CMakeFiles/move_base_msgs_generate_messages_py.dir/rule:
-	cd /home/workspace/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 pick_objects/CMakeFiles/move_base_msgs_generate_messages_py.dir/rule
-.PHONY : pick_objects/CMakeFiles/move_base_msgs_generate_messages_py.dir/rule
-
-# Convenience name for target.
-move_base_msgs_generate_messages_py: pick_objects/CMakeFiles/move_base_msgs_generate_messages_py.dir/rule
-
-.PHONY : move_base_msgs_generate_messages_py
-
-# fast build rule for target.
-move_base_msgs_generate_messages_py/fast:
-	cd /home/workspace/catkin_ws/build && $(MAKE) -f pick_objects/CMakeFiles/move_base_msgs_generate_messages_py.dir/build.make pick_objects/CMakeFiles/move_base_msgs_generate_messages_py.dir/build
-.PHONY : move_base_msgs_generate_messages_py/fast
-
-# Convenience name for target.
-pick_objects/CMakeFiles/actionlib_generate_messages_eus.dir/rule:
-	cd /home/workspace/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 pick_objects/CMakeFiles/actionlib_generate_messages_eus.dir/rule
-.PHONY : pick_objects/CMakeFiles/actionlib_generate_messages_eus.dir/rule
-
-# Convenience name for target.
-actionlib_generate_messages_eus: pick_objects/CMakeFiles/actionlib_generate_messages_eus.dir/rule
-
-.PHONY : actionlib_generate_messages_eus
-
-# fast build rule for target.
-actionlib_generate_messages_eus/fast:
-	cd /home/workspace/catkin_ws/build && $(MAKE) -f pick_objects/CMakeFiles/actionlib_generate_messages_eus.dir/build.make pick_objects/CMakeFiles/actionlib_generate_messages_eus.dir/build
-.PHONY : actionlib_generate_messages_eus/fast
-
-# Convenience name for target.
-pick_objects/CMakeFiles/actionlib_generate_messages_lisp.dir/rule:
-	cd /home/workspace/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 pick_objects/CMakeFiles/actionlib_generate_messages_lisp.dir/rule
-.PHONY : pick_objects/CMakeFiles/actionlib_generate_messages_lisp.dir/rule
-
-# Convenience name for target.
-actionlib_generate_messages_lisp: pick_objects/CMakeFiles/actionlib_generate_messages_lisp.dir/rule
-
-.PHONY : actionlib_generate_messages_lisp
-
-# fast build rule for target.
-actionlib_generate_messages_lisp/fast:
-	cd /home/workspace/catkin_ws/build && $(MAKE) -f pick_objects/CMakeFiles/actionlib_generate_messages_lisp.dir/build.make pick_objects/CMakeFiles/actionlib_generate_messages_lisp.dir/build
-.PHONY : actionlib_generate_messages_lisp/fast
-
-# Convenience name for target.
-pick_objects/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/rule:
-	cd /home/workspace/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 pick_objects/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/rule
-.PHONY : pick_objects/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/rule
-
-# Convenience name for target.
-actionlib_msgs_generate_messages_lisp: pick_objects/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/rule
-
-.PHONY : actionlib_msgs_generate_messages_lisp
-
-# fast build rule for target.
-actionlib_msgs_generate_messages_lisp/fast:
-	cd /home/workspace/catkin_ws/build && $(MAKE) -f pick_objects/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/build.make pick_objects/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/build
-.PHONY : actionlib_msgs_generate_messages_lisp/fast
-
-# Convenience name for target.
-pick_objects/CMakeFiles/move_base_msgs_generate_messages_lisp.dir/rule:
-	cd /home/workspace/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 pick_objects/CMakeFiles/move_base_msgs_generate_messages_lisp.dir/rule
-.PHONY : pick_objects/CMakeFiles/move_base_msgs_generate_messages_lisp.dir/rule
-
-# Convenience name for target.
-move_base_msgs_generate_messages_lisp: pick_objects/CMakeFiles/move_base_msgs_generate_messages_lisp.dir/rule
-
-.PHONY : move_base_msgs_generate_messages_lisp
-
-# fast build rule for target.
-move_base_msgs_generate_messages_lisp/fast:
-	cd /home/workspace/catkin_ws/build && $(MAKE) -f pick_objects/CMakeFiles/move_base_msgs_generate_messages_lisp.dir/build.make pick_objects/CMakeFiles/move_base_msgs_generate_messages_lisp.dir/build
-.PHONY : move_base_msgs_generate_messages_lisp/fast
 
 # Convenience name for target.
 pick_objects/CMakeFiles/actionlib_generate_messages_nodejs.dir/rule:
@@ -391,6 +196,111 @@ actionlib_generate_messages_nodejs/fast:
 .PHONY : actionlib_generate_messages_nodejs/fast
 
 # Convenience name for target.
+pick_objects/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/rule:
+	cd /home/workspace/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 pick_objects/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/rule
+.PHONY : pick_objects/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/rule
+
+# Convenience name for target.
+actionlib_msgs_generate_messages_lisp: pick_objects/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/rule
+
+.PHONY : actionlib_msgs_generate_messages_lisp
+
+# fast build rule for target.
+actionlib_msgs_generate_messages_lisp/fast:
+	cd /home/workspace/catkin_ws/build && $(MAKE) -f pick_objects/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/build.make pick_objects/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/build
+.PHONY : actionlib_msgs_generate_messages_lisp/fast
+
+# Convenience name for target.
+pick_objects/CMakeFiles/actionlib_msgs_generate_messages_py.dir/rule:
+	cd /home/workspace/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 pick_objects/CMakeFiles/actionlib_msgs_generate_messages_py.dir/rule
+.PHONY : pick_objects/CMakeFiles/actionlib_msgs_generate_messages_py.dir/rule
+
+# Convenience name for target.
+actionlib_msgs_generate_messages_py: pick_objects/CMakeFiles/actionlib_msgs_generate_messages_py.dir/rule
+
+.PHONY : actionlib_msgs_generate_messages_py
+
+# fast build rule for target.
+actionlib_msgs_generate_messages_py/fast:
+	cd /home/workspace/catkin_ws/build && $(MAKE) -f pick_objects/CMakeFiles/actionlib_msgs_generate_messages_py.dir/build.make pick_objects/CMakeFiles/actionlib_msgs_generate_messages_py.dir/build
+.PHONY : actionlib_msgs_generate_messages_py/fast
+
+# Convenience name for target.
+pick_objects/CMakeFiles/actionlib_generate_messages_cpp.dir/rule:
+	cd /home/workspace/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 pick_objects/CMakeFiles/actionlib_generate_messages_cpp.dir/rule
+.PHONY : pick_objects/CMakeFiles/actionlib_generate_messages_cpp.dir/rule
+
+# Convenience name for target.
+actionlib_generate_messages_cpp: pick_objects/CMakeFiles/actionlib_generate_messages_cpp.dir/rule
+
+.PHONY : actionlib_generate_messages_cpp
+
+# fast build rule for target.
+actionlib_generate_messages_cpp/fast:
+	cd /home/workspace/catkin_ws/build && $(MAKE) -f pick_objects/CMakeFiles/actionlib_generate_messages_cpp.dir/build.make pick_objects/CMakeFiles/actionlib_generate_messages_cpp.dir/build
+.PHONY : actionlib_generate_messages_cpp/fast
+
+# Convenience name for target.
+pick_objects/CMakeFiles/actionlib_generate_messages_lisp.dir/rule:
+	cd /home/workspace/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 pick_objects/CMakeFiles/actionlib_generate_messages_lisp.dir/rule
+.PHONY : pick_objects/CMakeFiles/actionlib_generate_messages_lisp.dir/rule
+
+# Convenience name for target.
+actionlib_generate_messages_lisp: pick_objects/CMakeFiles/actionlib_generate_messages_lisp.dir/rule
+
+.PHONY : actionlib_generate_messages_lisp
+
+# fast build rule for target.
+actionlib_generate_messages_lisp/fast:
+	cd /home/workspace/catkin_ws/build && $(MAKE) -f pick_objects/CMakeFiles/actionlib_generate_messages_lisp.dir/build.make pick_objects/CMakeFiles/actionlib_generate_messages_lisp.dir/build
+.PHONY : actionlib_generate_messages_lisp/fast
+
+# Convenience name for target.
+pick_objects/CMakeFiles/actionlib_generate_messages_eus.dir/rule:
+	cd /home/workspace/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 pick_objects/CMakeFiles/actionlib_generate_messages_eus.dir/rule
+.PHONY : pick_objects/CMakeFiles/actionlib_generate_messages_eus.dir/rule
+
+# Convenience name for target.
+actionlib_generate_messages_eus: pick_objects/CMakeFiles/actionlib_generate_messages_eus.dir/rule
+
+.PHONY : actionlib_generate_messages_eus
+
+# fast build rule for target.
+actionlib_generate_messages_eus/fast:
+	cd /home/workspace/catkin_ws/build && $(MAKE) -f pick_objects/CMakeFiles/actionlib_generate_messages_eus.dir/build.make pick_objects/CMakeFiles/actionlib_generate_messages_eus.dir/build
+.PHONY : actionlib_generate_messages_eus/fast
+
+# Convenience name for target.
+pick_objects/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/rule:
+	cd /home/workspace/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 pick_objects/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/rule
+.PHONY : pick_objects/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/rule
+
+# Convenience name for target.
+actionlib_msgs_generate_messages_eus: pick_objects/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/rule
+
+.PHONY : actionlib_msgs_generate_messages_eus
+
+# fast build rule for target.
+actionlib_msgs_generate_messages_eus/fast:
+	cd /home/workspace/catkin_ws/build && $(MAKE) -f pick_objects/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/build.make pick_objects/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/build
+.PHONY : actionlib_msgs_generate_messages_eus/fast
+
+# Convenience name for target.
+pick_objects/CMakeFiles/pick_objects.dir/rule:
+	cd /home/workspace/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 pick_objects/CMakeFiles/pick_objects.dir/rule
+.PHONY : pick_objects/CMakeFiles/pick_objects.dir/rule
+
+# Convenience name for target.
+pick_objects: pick_objects/CMakeFiles/pick_objects.dir/rule
+
+.PHONY : pick_objects
+
+# fast build rule for target.
+pick_objects/fast:
+	cd /home/workspace/catkin_ws/build && $(MAKE) -f pick_objects/CMakeFiles/pick_objects.dir/build.make pick_objects/CMakeFiles/pick_objects.dir/build
+.PHONY : pick_objects/fast
+
+# Convenience name for target.
 pick_objects/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/rule:
 	cd /home/workspace/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 pick_objects/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/rule
 .PHONY : pick_objects/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/rule
@@ -404,6 +314,21 @@ actionlib_msgs_generate_messages_cpp: pick_objects/CMakeFiles/actionlib_msgs_gen
 actionlib_msgs_generate_messages_cpp/fast:
 	cd /home/workspace/catkin_ws/build && $(MAKE) -f pick_objects/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/build.make pick_objects/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/build
 .PHONY : actionlib_msgs_generate_messages_cpp/fast
+
+# Convenience name for target.
+pick_objects/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/rule:
+	cd /home/workspace/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 pick_objects/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/rule
+.PHONY : pick_objects/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/rule
+
+# Convenience name for target.
+actionlib_msgs_generate_messages_nodejs: pick_objects/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/rule
+
+.PHONY : actionlib_msgs_generate_messages_nodejs
+
+# fast build rule for target.
+actionlib_msgs_generate_messages_nodejs/fast:
+	cd /home/workspace/catkin_ws/build && $(MAKE) -f pick_objects/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/build.make pick_objects/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/build
+.PHONY : actionlib_msgs_generate_messages_nodejs/fast
 
 src/pick_objects.o: src/pick_objects.cpp.o
 
@@ -440,27 +365,22 @@ help:
 	@echo "... depend"
 	@echo "... install"
 	@echo "... rebuild_cache"
+	@echo "... test"
 	@echo "... install/local"
 	@echo "... list_install_components"
 	@echo "... install/strip"
-	@echo "... pick_objects"
-	@echo "... actionlib_msgs_generate_messages_py"
-	@echo "... actionlib_msgs_generate_messages_nodejs"
-	@echo "... actionlib_msgs_generate_messages_eus"
-	@echo "... move_base_msgs_generate_messages_nodejs"
 	@echo "... edit_cache"
 	@echo "... actionlib_generate_messages_py"
-	@echo "... actionlib_generate_messages_cpp"
-	@echo "... move_base_msgs_generate_messages_cpp"
-	@echo "... test"
-	@echo "... move_base_msgs_generate_messages_eus"
-	@echo "... move_base_msgs_generate_messages_py"
-	@echo "... actionlib_generate_messages_eus"
-	@echo "... actionlib_generate_messages_lisp"
-	@echo "... actionlib_msgs_generate_messages_lisp"
-	@echo "... move_base_msgs_generate_messages_lisp"
 	@echo "... actionlib_generate_messages_nodejs"
+	@echo "... actionlib_msgs_generate_messages_lisp"
+	@echo "... actionlib_msgs_generate_messages_py"
+	@echo "... actionlib_generate_messages_cpp"
+	@echo "... actionlib_generate_messages_lisp"
+	@echo "... actionlib_generate_messages_eus"
+	@echo "... actionlib_msgs_generate_messages_eus"
+	@echo "... pick_objects"
 	@echo "... actionlib_msgs_generate_messages_cpp"
+	@echo "... actionlib_msgs_generate_messages_nodejs"
 	@echo "... src/pick_objects.o"
 	@echo "... src/pick_objects.i"
 	@echo "... src/pick_objects.s"
