@@ -36,16 +36,15 @@
 
 //global variables
 visualization_msgs::Marker marker;
-ros::Publisher marker_pub;
 
 //goal detection and marker movement code
 //callback function that kicks off when sub1 gets message from /move_base/result topic
 void marker_mover(const move_base_msgs::MoveBaseActionResult msg){
     //visualization_msgs::Marker marker; //declare marker
-    //marker.header.frame_id = "map";
-    //marker.header.stamp = ros::Time::now();
-    //marker.ns = "add_markers";
-    //marker.id = 0;
+    marker.header.frame_id = "map";
+    marker.header.stamp = ros::Time::now();
+    marker.ns = "add_markers";
+    marker.id = 0;
     ROS_INFO("--MOVE RESULT STATUS--");
     ROS_INFO("status: %d", msg.status.status);
     ROS_INFO("seq: %d", msg.header.seq);
@@ -69,7 +68,6 @@ void marker_mover(const move_base_msgs::MoveBaseActionResult msg){
             ROS_INFO("More than 2 nav goals have been executed. No longer moving marker.");
         }
     }
-    marker_pub.publish(marker);
 }
 
 // %Tag(INIT)%
@@ -78,7 +76,7 @@ int main( int argc, char** argv )
   ros::init(argc, argv, "add_markers");
   ros::NodeHandle n;
   ros::Rate r(1);
-  marker_pub = n.advertise<visualization_msgs::Marker>("visualization_marker", 1);
+  ros::Publisher marker_pub = n.advertise<visualization_msgs::Marker>("visualization_marker", 1);
 // %EndTag(INIT)%
 
   // Set our initial shape type to be a cube
@@ -87,7 +85,8 @@ int main( int argc, char** argv )
 // %EndTag(SHAPE_INIT)%
 
 // %Tag(MARKER_INIT)%
- 
+  while (ros::ok())
+  {
     //visualization_msgs::Marker marker;
     // Set the frame ID and timestamp.  See the TF tutorials for information on these.
     marker.header.frame_id = "map";
@@ -168,5 +167,5 @@ ros::Subscriber sub1 = n.subscribe("/move_base/result", 1, marker_mover);
     r.sleep();
   }
 // %EndTag(SLEEP_END)%
-
+}
 // %EndTag(FULLTEXT)%
