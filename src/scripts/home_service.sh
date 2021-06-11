@@ -14,6 +14,9 @@ sleep 10
 
 xterm -e " source /home/workspace/catkin_ws/devel/setup.bash; rosrun add_markers add_markers "
 
-sleep 10
 
 xterm -e " source /home/workspace/catkin_ws/devel/setup.bash; rosrun pick_objects pick_objects "
+
+
+
+

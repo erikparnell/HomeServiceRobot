@@ -31,30 +31,39 @@
 // %Tag(INCLUDES)%
 #include <ros/ros.h>
 #include <visualization_msgs/Marker.h>
-#include <move_base_msgs/MoveBaseResult.h>
+#include <move_base_msgs/MoveBaseActionResult.h>
 // %EndTag(INCLUDES)%
 
 
 //goal detection and marker movement code
 //callback function that kicks off when sub1 gets message from /move_base/result topic
-void marker_mover(const move_base_msgs::MoveBaseResult msg){
+void marker_mover(const move_base_msgs::MoveBaseActionResult msg){
+    visualization_msgs::Marker marker; //declare marker
+    marker.header.frame_id = "map";
+    marker.header.stamp = ros::Time::now();
+    marker.ns = "add_markers";
+    marker.id = 0;
     ROS_INFO("--MOVE RESULT STATUS--");
     ROS_INFO("status: %d", msg.status.status);
-    if(msg.status.status == 3){
-        if(msg.header.seq == 1){ //seq 1 = arrived at first goal
+    ROS_INFO("seq: %d", msg.header.seq);
+    if(msg.status.status == 3){ //check if status 3 = reached goal
+        if(msg.header.seq == 0){ //seq 1 = arrived at first goal
             ROS_INFO("Picking up object");
             ros::Duration(5).sleep(); // 5 seconds simulating "pick up"
             marker.color.a = 0.0; //robot "picks up" marker, actually just setting alpha to 0 to make it disappear
             ROS_INFO("Picked up object");
             
         }
-        else if(msg.header.seq == 2){ //seq 2 = arrived at return goal
+        else if(msg.header.seq == 1){ //seq 2 = arrived at return goal
             ROS_INFO("Dropping off object");
             ros::Duration(5).sleep(); // 5 seconds simulating "drop off"
             marker.pose.position.x = -0.25; //second/return goal positions
             marker.pose.position.y = -0.25;
             marker.color.a = 1.0; //robot finishes "drop off" marker upon arriving at return goal
             ROS_INFO("Dropped off object");
+        }
+        else{
+            ROS_INFO("More than 2 nav goals have been executed. No longer moving marker.");
         }
     }
 }
@@ -149,7 +158,8 @@ int main( int argc, char** argv )
 //subscribe to the goal results 
 ros::Subscriber sub1 = n.subscribe("/move_base/result", 1, marker_mover);
 
-
+// Handle ROS communication events
+    ros::spin();
 
 // %Tag(SLEEP_END)%
     r.sleep();
