@@ -54,7 +54,7 @@ void marker_mover(const move_base_msgs::MoveBaseResult msg){
             marker.pose.position.x = -0.25; //second/return goal positions
             marker.pose.position.y = -0.25;
             marker.color.a = 1.0; //robot finishes "drop off" marker upon arriving at return goal
-            ROS_INFO("Dropped off object")
+            ROS_INFO("Dropped off object");
         }
     }
 }
