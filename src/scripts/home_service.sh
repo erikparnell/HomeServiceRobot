@@ -10,13 +10,10 @@ sleep 10
 
 xterm -e " source /home/workspace/catkin_ws/devel/setup.bash; roslaunch turtlebot_rviz_launchers view_navigation.launch " &
 
-sleep 20
+sleep 15
 
-xterm -e " source /home/workspace/catkin_ws/devel/setup.bash; rosrun add_markers add_markers "
-
-sleep 1
-
-xterm -e " source /home/workspace/catkin_ws/devel/setup.bash; rosrun pick_objects pick_objects "
+xterm -e " source /home/workspace/catkin_ws/devel/setup.bash; roslaunch add_markers add_markers.launch "
+#launches both add_markers & pick_objects
 
 
 
