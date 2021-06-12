@@ -46,9 +46,9 @@ void marker_mover(const move_base_msgs::MoveBaseActionResult msg){
     //marker.header.stamp = ros::Time::now();
     //marker.ns = "add_markers";
     //marker.id = 0;
-    ROS_INFO("--MOVE RESULT STATUS--");
-    ROS_INFO("status: %d", msg.status.status);
-    ROS_INFO("seq: %d", msg.header.seq);
+    //ROS_INFO("--MOVE RESULT STATUS--");
+    //ROS_INFO("status: %d", msg.status.status);
+    //ROS_INFO("seq: %d", msg.header.seq);
     if(msg.status.status == 3){ //check if status 3 = reached goal
         if(msg.header.seq == 0){ //seq 1 = arrived at first goal
             ROS_INFO("Picking up object");

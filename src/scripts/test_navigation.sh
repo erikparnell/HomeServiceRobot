@@ -4,11 +4,11 @@ xterm -e " source /home/workspace/catkin_ws/devel/setup.bash; roslaunch turtlebo
 
 sleep 10
 
-xterm -e " source /home/workspace/catkin_ws/devel/setup.bash; roslaunch turtlebot_gazebo amcl_demo.launch map_file:=/home/workspace/catkin_ws/src/map/map.yaml " &
+xterm -e " source $(find / -name a782def1_setup.bash); roslaunch turtlebot_gazebo amcl_demo.launch map_file:=$(find / -name a782def1_map.yaml) " &
 
 sleep 10
 
-xterm -e " source /home/workspace/catkin_ws/devel/setup.bash; roslaunch turtlebot_rviz_launchers view_navigation.launch "
+xterm -e " source $(find / -name a782def1_setup.bash); roslaunch turtlebot_rviz_launchers view_navigation.launch "
 
 
 
